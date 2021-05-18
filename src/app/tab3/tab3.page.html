@@ -1,51 +1,54 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-<ion-center style="color: aqua; margin-left: 40%; font-style: oblique; font-size: 50px;font-family: Georgia"> Contact List</ion-center>
-</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-card >
-  <ion-card-content style="float:center">
-    <ion-item>
+    <ion-toolbar>
+      <ion-title>
+  <ion-center style="color: aqua; margin-left: 40%; font-style: oblique; font-size: 50px;font-family: Georgia"> Contact List</ion-center>
+  </ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content >
+  <ion-card class="cover">
+    <form [formGroup]="contactForm" (ngSubmit)="formSubmit()">
+    <ion-card-content>
+      <ion-item>
         <ion-avatar slot="start">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTezH7WqKom8ztcNzK4GDqtKKZ2eL9vBqn1TQ&usqp=CAU">
           </ion-avatar>
-      <ion-label position="floating" style="font-family: georgia; font-size:20px; color: yellow;">Complete Name</ion-label>
-      <ion-input [(ngModel)]="contName" enterkeyhint="search"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-avatar slot="start">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPY1sZl1_Ee12C93KAw_lwukITRj28rMJEng&usqp=CAU">
-          </ion-avatar>
-      <ion-label position="floating" style="font-family: georgia; font-size:20px; color: yellow;">Mobile Number</ion-label>
-      <ion-input [(ngModel)]="contNumber"></ion-input>
-    </ion-item>
-    <br />
-    <ion-button fill="solid" color="success" shape="square" (click)="saveC()" style="font-family: Georgia; font-weight: bolder; color:white;margin-left: 90px">Save</ion-button>
-
-    <ion-list>
-      <!-- Sliding item -->
-      <ion-item-sliding id="item100"  *ngFor="let cont of contacts">
-        <ion-item href="#">
+        <ion-label position="floating" style="font-family: georgia; font-size:20px; color: yellow;">Contact Name</ion-label>
+        <ion-input  formControlName="name" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
           <ion-avatar slot="start">
-            <img src="https://st.depositphotos.com/1637332/2734/v/950/depositphotos_27343501-stock-illustration-button-internet-contact-icon-red.jpg">
-          </ion-avatar>
-          <ion-label style="font-family: Georgia; font-weight: bolder; font-size:50px; color:whitesmoke;">
-            <h3>{{cont.name}}</h3>
-            <p>{{cont.number}}</p>
-          </ion-label>
-        </ion-item>
-
-        <ion-item-options side="end">
-          <ion-item-option color="danger">
-            <ion-icon slot="icon-only" name="trash" (click)="trash(cont)"></ion-icon>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPY1sZl1_Ee12C93KAw_lwukITRj28rMJEng&usqp=CAU">
+            </ion-avatar>
+        <ion-label position="floating" style="font-family: georgia; font-size:20px; color: yellow;">Mobile Number</ion-label>
+        <ion-input formControlName="mobile" type="text" required></ion-input>
+      </ion-item>
+      <br/>
+      <ion-button fill="solid" color="success" shape="square" (click)="saveC()" style="font-family: Georgia; font-weight: bolder; color:white;margin-left: 90px">Save</ion-button>
+      <ion-list>
+        <ion-item-sliding id="item100"  *ngFor="let cont of contacts">
+          <ion-item href="#">
+              <ion-avatar slot="start">
+                  <img src="https://st.depositphotos.com/1637332/2734/v/950/depositphotos_27343501-stock-illustration-button-internet-contact-icon-red.jpg">
+                </ion-avatar>
+            <ion-label style="font-family: Georgia; font-weight: bolder; font-size:50px; color:whitesmoke;">
+              <h3>{{cont.name}}</h3>
+              <p>{{cont.mobile}}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item-options side="end">
+            <ion-item-option color="danger" (click)="deleteContact(cont.$key)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
           <ion-item-option>
-            <ion-icon slot="icon-only" expand ="block" routerLink = 'message' name="mail" routingDirection= "forward"></ion-icon>
+            <ion-icon slot="icon-only" expand="block" routerLink='message' name="mail" routerDirection="forward"></ion-icon>
           </ion-item-option>
-        </ion-item-options>
+        </ion-item-options>    
       </ion-item-sliding>
     </ion-list>
-  </ion-card-content>
-</ion-card>
+    
+      </ion-card-content>
+    </form>
+  </ion-card>
+</ion-content>
